@@ -17,7 +17,7 @@ class Extractor:
             self.__cache = self.__extract_alarm_group()
             self.__timestamp = datetime.now()
 
-        return self.__cache
+        return {"message":self.__cache,"timestamp": self.__timestamp}
 
     def __extract_alarm_group(self):
         site = self.__fetch_site()

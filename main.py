@@ -16,5 +16,5 @@ def read_root():
 
 @app.get("/")
 def get_alarm_group():
-    group = extractor.get_alarm_group()
-    return {"message": group}
+    alarm_group = extractor.get_alarm_group()
+    return alarm_group
