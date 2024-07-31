@@ -16,8 +16,9 @@ class Extractor:
                                               datetime) and self.__timestamp < self.__get_next_midnight():
             self.__cache = self.__extract_alarm_group()
             self.__timestamp = datetime.now()
+        number = self.__get_alarm_group_number(self.__cache)
 
-        return {"message":self.__cache,"timestamp": self.__timestamp}
+        return {"message": self.__cache, "number": number, "timestamp": self.__timestamp}
 
     def __extract_alarm_group(self):
         site = self.__fetch_site()
@@ -33,3 +34,10 @@ class Extractor:
 
     def __get_next_midnight(self):
         return datetime.combine(datetime.now(), time.min)
+
+    def __get_alarm_group_number(self, message: str):
+        try:
+            numbers = re.findall("\\d", message)
+            return next(x for x in numbers)
+        except Exception:
+            pass
